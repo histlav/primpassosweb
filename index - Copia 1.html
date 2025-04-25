@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Jornada no Suporte - TechSupport Connect</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --success-color: #2ecc71;
+            --connector-color: #3498db;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cGF0aCBkPSJNMjUgMTBjLTguMjg0IDAtMTUgNi43MTYtMTUgMTUgMCA0LjA4OSAxLjYzOSA3Ljc5NCA0LjI5NSAxMC41MDdsLTEuNjg4IDYuMTcyYy0wLjEwMSAwLjM3IDAuMDYxIDAuNzU5IDAuNDEyIDAuOTQ1IDAuMTI2IDAuMDY3IDAuMjYxIDAuMSAwLjM5NiAwLjEgMC4yMjkgMCAwLjQ1NS0wLjA5OCAwLjYxMy0wLjI4MWw1LjEyLTUuOTM5YzEuODM0IDAuNzkzIDMuODU1IDEuMjM3IDUuOTc0IDEuMjM3IDguMjg0IDAgMTUtNi43MTYgMTUtMTVzLTYuNzE2LTE1LTE1LTE1eiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=');
+            background-repeat: repeat;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .welcome-section {
+            background-color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .welcome-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .welcome-image {
+            flex: 0 0 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .welcome-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Novo estilo para o fluxograma horizontal */
+        .journey-path {
+            margin: 3rem 0;
+            position: relative;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .journey-flow {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 600px;
+            padding: 20px 0;
+        }
+        
+        .flow-row {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin: 20px 0;
+            height: 160px;
+        }
+        
+        .flow-box {
+            width: 160px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .box-icon {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border: 4px solid var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer; /* Adicionado cursor pointer para indicar que é clicável */
+        }
+        
+        .box-icon i {
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .flow-box:hover .box-icon {
+            background-color: var(--secondary-color);
+            color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .box-title {
+            font-weight: bold;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            cursor: pointer; /* Adicionado cursor pointer para indicar que é clicável */
+        }
+        
+        .box-desc {
+            font-size: 0.85rem;
+            text-align: center;
+            color: #666;
+            padding: 0 5px;
+        }
+        
+        .challenges-section {
+            background-color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-bg-icon {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 10rem;
+            opacity: 0.05;
+            color: var(--primary-color);
+            transform: rotate(-15deg);
+        }
+        
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .challenge-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .challenge-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .challenge-card h3 i {
+            margin-right: 8px;
+            color: var(--accent-color);
+        }
+        
+        .tips-section {
+            background-color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tips-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tip {
+            margin-bottom: 1rem;
+            padding: 1rem 1rem 1rem 3rem;
+            position: relative;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .tip:hover {
+            background-color: #e9f7ef;
+            transform: translateX(5px);
+        }
+        
+        .tip:before {
+            content: "✓";
+            color: var(--success-color);
+            position: absolute;
+            left: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cGF0aCBkPSJNMjUgMTBjLTguMjg0IDAtMTUgNi43MTYtMTUgMTUgMCA0LjA4OSAxLjYzOSA3Ljc5NCA0LjI5NSAxMC41MDdsLTEuNjg4IDYuMTcyYy0wLjEwMSAwLjM3IDAuMDYxIDAuNzU5IDAuNDEyIDAuOTQ1IDAuMTI2IDAuMDY3IDAuMjYxIDAuMSAwLjM5NiAwLjEgMC4yMjkgMCAwLjQ1NS0wLjA5OCAwLjYxMy0wLjI4MWw1LjEyLTUuOTM5YzEuODM0IDAuNzkzIDMuODU1IDEuMjM3IDUuOTc0IDEuMjM3IDguMjg0IDAgMTUtNi43MTYgMTUtMTVzLTYuNzE2LTE1LTE1LTE1eiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=');
+            background-repeat: repeat;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+        }
+        
+        .contact-item i {
+            margin-right: 8px;
+            color: var(--light-color);
+        }
+        
+        .social-icons {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Estilo para links nos boxes do fluxograma */
+        .flow-box a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .flow-row {
+                flex-direction: column;
+                align-items: center;
+                height: auto;
+                margin: 10px 0;
+            }
+            
+            .flow-box {
+                margin: 20px 0;
+            }
+            
+            .connector {
+                display: none;
+            }
+            
+            .welcome-image {
+                margin-top: 1.5rem;
+                flex: 0 0 100%;
+            }
+            
+            .tips-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation for elements */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Floating animation for some elements */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="logo-container">
+                <i class="fas fa-headset logo-icon floating"></i>
+                <h1>Bem-vindo à Sua Jornada no Suporte</h1>
+            </div>
+            <p>Conheça o caminho que você irá percorrer como técnico de suporte em nossa empresa</p>
+        </div>
+    </header>
+    
+    <div class="container">
+    <section class="welcome-section fade-in">
+        <div class="welcome-text">
+            <h2><i class="fas fa-star"></i> Olá, novo técnico!</h2>
+            <p>Estamos muito felizes em ter você em nossa equipe. Para ajudá-lo a entender melhor sua jornada conosco, preparamos este guia visual que mostra as etapas principais pelas quais você passará, os desafios que poderá enfrentar e dicas para ter sucesso.</p>
+            <p>Lembre-se: todos nós já estivemos no seu lugar, e estamos aqui para apoiá-lo em cada passo do caminho!</p>
+        </div>
+        <div class="welcome-image">
+            <img src="https://live.staticflickr.com/65535/54474336585_077deb5d51_m.jpg" alt="Técnico de Suporte" class="floating">
+        </div>
+    </section>
+        
+        <section class="journey-path fade-in">
+            <h2><i class="fas fa-road"></i> Sua Jornada no Suporte</h2>
+            
+            <div class="journey-flow">
+                <!-- Conectores -->
+                <div class="connector connector-1-down"></div>
+                <div class="connector connector-split-h"></div>
+                <div class="connector connector-to-2"></div>
+                <div class="connector connector-to-3"></div>
+                <div class="connector connector-2-down"></div>
+                <div class="connector connector-3-down"></div>
+                <div class="connector connector-join-h"></div>
+                <div class="connector connector-to-4"></div>
+                <div class="connector connector-4-5"></div>
+                <div class="connector connector-5-down"></div>
+                <div class="connector connector-split2-h"></div>
+                <div class="connector connector-to-6"></div>
+                <div class="connector connector-to-7"></div>
+                <div class="connector connector-6-down"></div>
+                <div class="connector connector-7-down"></div>
+                <div class="connector connector-join2-h"></div>
+                <div class="connector connector-to-8"></div>
+                
+                <!-- Primeira linha - Box 1 -->
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <a href="primeira-semana.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="box-title">Primeira Semana</div>
+                            <div class="box-desc">Integração, conhecendo a empresa, sistemas e equipe.</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Segunda linha - Box 2 e Box 3 -->
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <a href="treinafiscal.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="box-title">Treinamento 23</div>
+                            <div class="box-desc">Fundamentos de atendimento ao cliente e protocolos de comunicação.</div>
+                        </a>
+                    </div>
+                    
+                    <div class="flow-box">
+                        <a href="treinfolha.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="box-title">Treinamento 13</div>
+                            <div class="box-desc">Aprofundamento técnico em sistemas e soluções.</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Terceira linha - Box 4 -->
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <a href="primdiaatend.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="box-title">Início de Atendimento</div>
+                            <div class="box-desc">Primeiros atendimentos supervisionados.</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quarta linha - Box 5 -->
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <a href="termino-experiencia.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-file-signature"></i>
+                            </div>
+                            <div class="box-title">Término Contrato Experiência</div>
+                            <div class="box-desc">Avaliação de desempenho e feedback.</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quinta linha - Box 6 e Box 7 -->
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <a href="treinamento-25.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="box-title">Treinamento 25</div>
+                            <div class="box-desc">Técnicas avançadas de suporte e resolução de problemas complexos.</div>
+                        </a>
+                    </div>
+                    
+                    <div class="flow-box">
+                        <a href="treinamento-31.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="box-title">Treinamento 31</div>
+                            <div class="box-desc">Especialização em áreas específicas de suporte.</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Sexta linha - Box 8 -->
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <a href="hibrido.html" target="_blank">
+                            <div class="box-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="box-title">Híbrido</div>
+                            <div class="box-desc">Flexibilidade entre trabalho remoto e presencial.</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="challenges-section fade-in">
+            <i class="fas fa-mountain section-bg-icon"></i>
+            <h2><i class="fas fa-exclamation-triangle"></i> Desafios que Você Pode Encontrar</h2>
+            <div class="challenges-grid">
+                <div class="challenge-card">
+                    <h3><i class="fas fa-brain"></i> Curva de Aprendizado</h3>
+                    <p>Muitas informações novas para absorver em pouco tempo. Seja paciente consigo mesmo e faça anotações.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <h3><i class="fas fa-puzzle-piece"></i> Casos Complexos</h3>
+                    <p>Alguns problemas serão desafiadores e exigirão pesquisa e consulta com colegas mais experientes.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <h3><i class="fas fa-angry"></i> Clientes Difíceis</h3>
+                    <p>Nem todos os clientes estarão calmos. Aprenda técnicas de comunicação para lidar com situações tensas.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <h3><i class="fas fa-clock"></i> Pressão de Tempo</h3>
+                    <p>Métricas de atendimento podem parecer desafiadoras no início. Com prática, você encontrará seu ritmo.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <h3><i class="fas fa-brain"></i> Fadiga Mental</h3>
+                    <p>Atendimento contínuo pode ser cansativo. Aprenda a fazer pausas estratégicas para manter a qualidade.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <h3><i class="fas fa-sync-alt"></i> Atualizações de Sistemas</h3>
+                    <p>Nossos sistemas evoluem constantemente. Esteja preparado para aprender e se adaptar regularmente.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips-section fade-in">
+            <i class="fas fa-lightbulb section-bg-icon"></i>
+            <h2><i class="fas fa-star"></i> Dicas para o Sucesso</h2>
+            <div class="tips-container">
+                <div class="tip">Faça perguntas sempre que necessário - não existe pergunta ruim quando se está aprendendo.</div>
+                <div class="tip">Mantenha um caderno de anotações ou documento digital com procedimentos e soluções comuns.</div>
+                <div class="tip">Pratique a escuta ativa para entender completamente os problemas dos clientes.</div>
+                <div class="tip">Cuide de sua saúde física e mental - faça pausas, hidrate-se e pratique técnicas de relaxamento.</div>
+                <div class="tip">Celebre suas pequenas vitórias e aprenda com os erros - ambos fazem parte do crescimento.</div>
+                <div class="tip">Construa relacionamentos com seus colegas - o trabalho em equipe é essencial para o sucesso.</div>
+            </div>
+        </section>
+        
+        <section class="welcome-section fade-in">
+            <div class="welcome-text">
+                <h2><i class="fas fa-users"></i> Nossa Equipe de Suporte</h2>
+                <p>Nossa equipe é formada por profissionais dedicados que estão prontos para ajudar você a crescer. Somos uma família que trabalha junta para oferecer o melhor atendimento aos nossos clientes.</p>
+                <p>Conte com seus colegas e supervisores para orientação sempre que precisar!</p>
+            </div>
+            <div class="welcome-image">
+                <img src="https://img.freepik.com/free-vector/customer-support-illustration_1150-39917.jpg" alt="Equipe de Suporte" class="floating">
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-bg"></div>
+        <div class="container">
+            <div class="logo-container">
+                <i class="fas fa-headset logo-icon"></i>
+                <h3>TechSupport Connect</h3>
+            </div>
+            <p>Estamos juntos nessa jornada!</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-question-circle"></i>
+                    <p>Dúvidas? Entre em contato com o RH ou seu supervisor direto</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>suporte.rh@techsupportconnect.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>Ramal: 1234</p>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

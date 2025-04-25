@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento Fila 25 - Contabilidade e Lalur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4caf50;
+            --secondary-color: #eef2f7;
+            --accent-color: #4caf50;
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c3e50' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .intro {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='24' viewBox='0 0 88 24'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='autumn' fill='%232c3e50' fill-opacity='1'%3E%3Cpath d='M10 0l30 15 2 1V2.18A10 10 0 0 0 41.76 0H39.7a8 8 0 0 1 .3 2.18v10.58L14.47 0H10zm31.76 24a10 10 0 0 0-5.29-6.76L4 1 2 0v13.82a10 10 0 0 0 5.53 8.94L10 24h4.47l-6.05-3.02A8 8 0 0 1 4 13.82V3.24l31.58 15.78A8 8 0 0 1 39.7 24h2.06zM78 24l2.47-1.24A10 10 0 0 0 86 13.82V0l-2 1-32.47 16.24A10 10 0 0 0 46.24 24h2.06a8 8 0 0 1 4.12-4.98L84 3.24v10.58a8 8 0 0 1-4.42 7.16L73.53 24H78zm0-24L48 15l-2 1V2.18A10 10 0 0 1 46.24 0h2.06a8 8 0 0 0-.3 2.18v10.58L73.53 0H78z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .intro h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .intro h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .intro p {
+            color: var(--light-text);
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+        }
+        
+        .faq-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .faq-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .faq-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-icon {
+            font-size: 1.8rem;
+            margin-right: 1rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .faq-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .faq-content {
+            padding: 1.5rem;
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .faq-content p {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .faq-decoration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 4rem;
+            opacity: 0.1;
+            color: var(--primary-color);
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .timeline-section {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c3e50' fill-opacity='1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            top: 15px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: 4px solid var(--primary-color);
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .timeline-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .faq-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+        .delay-6 { animation-delay: 1.2s; }
+        .delay-7 { animation-delay: 1.4s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-pattern"></div>
+        <div class="logo-container">
+            <i class="fas fa-file-invoice logo"></i>
+            <h1>Treinamento Fila 25 - Contabilidade e Lalur</h1>
+        </div>
+        <p>Guia completo para o time de contabilidade e lalur</p>
+    </header>
+    
+    <div class="container">
+        <section class="intro fade-in">
+            <div class="intro-bg"></div>
+            <h1>Bem-vindo ao Treinamento da Fila 25</h1>
+            <p>Este guia foi desenvolvido para apoiar sua jornada de aprendizado na área de Contabilidade. Aqui você encontrará informações essenciais sobre o treinamento, o que esperar e como se preparar para atender nossos clientes com excelência.</p>
+        </section>
+        
+        <div class="faq-container">
+            <div class="faq-card fade-in delay-1">
+                <div class="faq-header">
+                    <div class="faq-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="faq-title">O que é a Fila 25?</h3>
+                </div>
+                <div class="faq-content">
+                    <p>A Fila 25 é uma <span class="highlight">fila especializada de atendimento</span> dedicada exclusivamente a atender as seguintes situações:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Dúvidas e configurações do módulo lalur</li>
+                        <li>Dúvidas e configurações da Contabilidade Digital</li>
+                        <li>Importações de extrato bancário</li>
+                        <li>SPED ECD e ECF</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Este é o ponto de partida ideal para sua carreira na área de contabilidade!</p>
+                    <i class="fas fa-building faq-decoration"></i>
+                </div>
+            </div>
+            
+            <div class="faq-card fade-in delay-2">
+                <div class="faq-header">
+                    <div class="faq-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="faq-title">Como funciona o treinamento?</h3>
+                </div>
+                <div class="faq-content">
+                    <p>Nosso treinamento é <span class="highlight">abrangente e estruturado</span> para garantir seu sucesso:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Cronograma completo cobrindo todos os temas relevantes</li>
+                        <li>Apresentação prática das ferramentas de trabalho</li>
+                        <li>Técnicas de pesquisa eficientes para solução de problemas</li>
+                        <li>Preparação para lidar com situações novas durante o atendimento</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Você será guiado por especialistas que irão compartilhar conhecimentos e melhores práticas da área de contabilidade.</p>
+                    <i class="fas fa-graduation-cap faq-decoration"></i>
+                </div>
+            </div>
+            
+            <div class="faq-card fade-in delay-3">
+                <div class="faq-header">
+                    <div class="faq-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="faq-title">Para o que ele me capacita?</h3>
+                </div>
+                <div class="faq-content">
+                    <p>O treinamento desenvolve um conjunto completo de habilidades:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Realizar <span class="highlight">atendimentos técnicos</span> com segurança e precisão</li>
+                        <li>Dominar conhecimentos específicos na solução de erros de ECD e ECF</li>
+                        <li>Desenvolver comunicação clara e profissional com os clientes</li>
+                        <li>Conduzir ligações de maneira eficiente e objetiva</li>
+                        <li>Resolver dúvidas e problemas relacionados ao módulo contabilidade e lalur</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Você estará preparado não apenas tecnicamente, mas também para oferecer um atendimento de excelência!</p>
+                    <i class="fas fa-user-check faq-decoration"></i>
+                </div>
+            </div>
+            
+            <div class="faq-card fade-in delay-4">
+                <div class="faq-header">
+                    <div class="faq-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="faq-title">O que devo esperar?</h3>
+                </div>
+                <div class="faq-content">
+                    <p>Prepare-se para uma <span class="highlight">jornada de aprendizado enriquecedora</span> que:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Combina teoria sólida e aplicação prática</li>
+                        <li>Constrói sua confiança de forma gradual e consistente</li>
+                        <li>Permite familiarização completa com sistemas antes do atendimento independente</li>
+                        <li>Oferece ambiente seguro para aprender e fazer perguntas</li>
+                    </ul>
+                    <p style="margin-top: 10px;">O processo foi desenhado para que você se sinta cada vez mais preparado a cada etapa concluída.</p>
+                    <i class="fas fa-road faq-decoration"></i>
+                </div>
+            </div>
+            
+            <div class="faq-card fade-in delay-5">
+                <div class="faq-header">
+                    <div class="faq-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="faq-title">Quais desafios poderei encontrar?</h3>
+                </div>
+                <div class="faq-content">
+                    <p>É normal enfrentar alguns desafios durante o aprendizado:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>A tendência de <span class="highlight">complicar assuntos</span> que podem ter soluções simples</li>
+                        <li>Confie nas orientações dos líderes sobre o que priorizar</li>
+                        <li>Mesmo com experiência prévia, haverá muitas informações novas</li>
+                        <li>O início pode parecer intenso, mas fique tranquilo: todos conseguem aprender!</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Lembre-se: cada pessoa tem seu próprio ritmo de aprendizado, e nossa equipe está aqui para apoiar você em cada passo.</p>
+                    <i class="fas fa-mountain faq-decoration"></i>
+                </div>
+            </div>
+            
+            <div class="faq-card fade-in delay-7">
+                <div class="faq-header">
+                    <div class="faq-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="faq-title">O que se espera de mim?</h3>
+                </div>
+                <div class="faq-content">
+                    <p>Para aproveitar ao máximo esta oportunidade de crescimento:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Mantenha <span class="highlight">atenção plena</span> durante todo o treinamento</li>
+                        <li>Estabeleça comunicação aberta e proativa com gestores e líderes</li>
+                        <li>Adote uma mentalidade de desenvolvimento contínuo</li>
+                        <li>Pratique a autorreflexão: "O que já sei? Em quais aspectos posso evoluir?"</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Sua curiosidade e dedicação serão fundamentais para construir uma base sólida na área contábil!</p>
+                    <i class="fas fa-star faq-decoration"></i>
+                </div>
+            </div>
+        </div>
+        
+        <section class="timeline-section fade-in">
+            <div class="timeline-bg"></div>
+            <div class="timeline-header">
+                <h2>Sua Jornada na Contabilidade</h2>
+                <p>Conheça as etapas do seu desenvolvimento profissional</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Integração</h3>
+                        <p>Conhecendo a equipe, sistemas e ferramentas básicas da área de contabilidade.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Fundamentos</h3>
+                        <p>Aprendizado dos conceitos essenciais de balanço patrimonial, informativos e configurações do Lalur</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Prática Supervisionada</h3>
+                        <p>Exercícios práticos nos sistemas com acompanhamento direto.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Primeiros Atendimentos</h3>
+                        <p>Início dos atendimentos na Fila 23 com suporte da equipe.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Preparação para Fila 24</h3>
+                        <p>Treinamento avançado para atendimento de empresas de Lucro Presumido e Real.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Especialização</h3>
+                        <p>Desenvolvimento contínuo e aprofundamento em temas fiscais complexos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-file-invoice"></i>
+            </div>
+            <h3>Equipe de Escrita Fiscal</h3>
+            <p>Estamos aqui para apoiar seu desenvolvimento profissional</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>suporte.fiscal@empresa.com.br</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Ramal: 2300</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-users"></i>
+                    <span>Sala de Treinamento: Bloco A - 2º andar</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

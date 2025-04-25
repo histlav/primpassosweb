@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Atendimento Telefônico - Fiscal e Folha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5282;
+            --secondary-color: #e9f2fb;
+            --accent-color: #4299e1;
+            --fiscal-color: #2b6cb0;
+            --folha-color: #38a169;
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c5282' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--fiscal-color) 0%, var(--folha-color) 100%);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .intro {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='24' viewBox='0 0 88 24'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='autumn' fill='%232c5282' fill-opacity='1'%3E%3Cpath d='M10 0l30 15 2 1V2.18A10 10 0 0 0 41.76 0H10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Adicionando estilos para as seções de conteúdo */
+        .content-section {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        /* Estilos para as áreas específicas */
+        .fiscal-section {
+            border-left: 4px solid var(--fiscal-color);
+        }
+        
+        .folha-section {
+            border-left: 4px solid var(--folha-color);
+        }
+        
+        /* Estilos para listas */
+        .guide-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .guide-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .guide-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Estilos para ícones */
+        .icon {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        /* Estilos para responsividade */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .intro, .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-pattern"></div>
+        <div class="logo-container">
+            <i class="fas fa-headset logo"></i>
+            <h1>Guia de Atendimento Telefônico</h1>
+        </div>
+        <p>Fiscal e Folha de Pagamento</p>
+    </header>
+    
+    <div class="container">
+        <section class="intro">
+            <div class="intro-bg"></div>
+            <h2>Bem-vindo ao Guia de Atendimento</h2>
+            <p>Este guia foi desenvolvido para auxiliar no atendimento telefônico relacionado às áreas fiscal e folha de pagamento.</p>
+        </section>
+        
+        <section class="content-section fiscal-section">
+            <h3 class="section-title"><i class="fas fa-file-invoice icon"></i>Área Fiscal</h3>
+            <ul class="guide-list">
+                <li><strong>Dúvidas sobre notas fiscais:</strong> Verificar o sistema XYZ para informações sobre emissão e status.</li>
+                <li><strong>Impostos e tributos:</strong> Consultar a tabela atualizada de alíquotas no sistema.</li>
+                <li><strong>Declarações fiscais:</strong> Informar prazos conforme calendário fiscal atualizado.</li>
+                <li><strong>Pendências fiscais:</strong> Verificar no sistema de gestão e encaminhar para o setor responsável.</li>
+            </ul>
+        </section>
+        
+        <section class="content-section folha-section">
+            <h3 class="section-title"><i class="fas fa-users icon"></i>Folha de Pagamento</h3>
+            <ul class="guide-list">
+                <li><strong>Contracheques:</strong> Orientar sobre acesso ao portal do colaborador.</li>
+                <li><strong>Férias e 13º salário:</strong> Verificar datas programadas no sistema de RH.</li>
+                <li><strong>Benefícios:</strong> Consultar política vigente de benefícios por categoria.</li>
+                <li><strong>Descontos e adicionais:</strong> Verificar no sistema de folha e explicar conforme legislação.</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h3 class="section-title"><i class="fas fa-phone-alt icon"></i>Protocolo de Atendimento</h3>
+            <ol class="guide-list">
+                <li>Atender com cordialidade, identificando-se e à empresa</li>
+                <li>Ouvir atentamente a solicitação do cliente</li>
+                <li>Registrar o chamado no sistema com todas as informações necessárias</li>
+                <li>Fornecer um número de protocolo ao cliente</li>
+                <li>Encaminhar para o setor responsável quando não for possível resolver de imediato</li>
+                <li>Finalizar o atendimento confirmando se há mais alguma necessidade</li>
+            </ol>
+        </section>
+    </div>
+    
+    <footer style="background-color: var(--primary-color); color: var(--white); text-align: center; padding: 1rem 0; margin-top: 2rem;">
+        <p>&copy; 2023 Guia de Atendimento Telefônico - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>
